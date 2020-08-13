@@ -12,7 +12,9 @@ public struct Inject<Value> {
         Resolver.shared.resolve(key: key)
     }
     
-    /// Init
-    public init() { }
+    /// Constructor
+    public init(_ key: String? = nil) {
+        self.key = key
+    }
 }
 
