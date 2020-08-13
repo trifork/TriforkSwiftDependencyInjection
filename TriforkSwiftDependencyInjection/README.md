@@ -1,3 +1,3 @@
 # TriforkSwiftDependencyInjection
 
-A description of this package.
+A simple implementation of Dependency Injection using property wrapper: `@Inject`

@@ -1,10 +1,3 @@
-//
-//  File.swift
-//  
-//
-//  Created by Thomas Kalhøj Clemensen on 13/08/2020.
-//
-
 import Foundation
 @testable import TriforkSwiftDependencyInjection
 
