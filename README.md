@@ -1,5 +1,3 @@
-# TriforkSwiftDependencyInjection 💉
-
 ![banner](https://github.com/trifork/TriforkSwiftDependencyInjection/blob/master/banner.png)
 
 ## Installation
