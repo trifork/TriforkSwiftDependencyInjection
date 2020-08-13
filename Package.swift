@@ -20,10 +20,9 @@ let package = Package(
         // Targets can depend on other targets in this package, and on products in packages which this package depends on.
         .target(
             name: "TriforkSwiftDependencyInjection",
-            dependencies: [],
-            path: "TriforkSwiftDependencyInjection/Sources/TriforkSwiftDependencyInjection")
+            dependencies: []),
         .testTarget(
-            dependencies: ["TriforkSwiftDependencyInjection"],
-            name: "TriforkSwiftDependencyInjection/Tests/TriforkSwiftDependencyInjectionTests")
+            name: "TriforkSwiftDependencyInjectionTests",
+            dependencies: ["TriforkSwiftDependencyInjection"]),
     ]
 )
