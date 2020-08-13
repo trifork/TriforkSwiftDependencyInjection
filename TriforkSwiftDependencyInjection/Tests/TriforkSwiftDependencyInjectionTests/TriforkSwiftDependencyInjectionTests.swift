@@ -19,10 +19,16 @@ final class TriforkSwiftDependencyInjectionTests: XCTestCase {
     func testRegisterKey() {
         Resolver.shared.register(Bread.self, key: "🥐", { Croissant() })
         Resolver.shared.register(Bread.self, { PainAuChocolat() })
+        
+        // Using same key, but for different protocol type
+        Resolver.shared.register(Chocolate.self, key: "🥐", { PainAuChocolat() })
+        
         let tester = Tester()
         
         XCTAssertTrue(tester.breadKey is Croissant)
         XCTAssertTrue(tester.bread is PainAuChocolat)
+        XCTAssertTrue(tester.chocolate is PainAuChocolat)
+        
     }
     
     func testAllowOverride() {
@@ -48,5 +54,6 @@ final class TriforkSwiftDependencyInjectionTests: XCTestCase {
     static var allTests = [
         ("testRegisterType", testRegisterType),
         ("testRegisterKey", testRegisterKey),
+        ("testAllowOverride", testAllowOverride)
     ]
 }

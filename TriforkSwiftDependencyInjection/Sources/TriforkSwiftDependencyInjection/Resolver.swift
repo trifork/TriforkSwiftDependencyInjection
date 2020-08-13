@@ -18,8 +18,9 @@ public class Resolver {
     
     /// Register instance for protocol type or key
     /// The key is optional and can be useful to register multiple instances of the same type. The key can be used in the `Inject` property wrapper.
+    /// Note that keys are only unique for the same type. The same key can be used for different protocol types.
     public func register<T>(_ proto: T.Type, key: String? = nil, _ factory: @escaping () -> T) {
-        let k = key ?? typeKey(proto)
+        let k = typeKey(proto, key: key)
         if factories[k] != nil && !allowOverride {
             fatalError("You are overriding the factory for '\(k)'. The resolver already contains a factory for that key. Enable `allowOverride` property to allow this behaviour.")
         }
@@ -28,19 +29,26 @@ public class Resolver {
     
     /// Resolves the instance from the `Inject` property wrapper.
     internal func resolve<T>(key: String? = nil) -> T {
-        let component: T? = factories[key ?? typeKey(T.self)]?() as? T
+        let k = typeKey(T.self, key: key)
+        let component: T? = factories[k]?() as? T
         guard let c = component else {
-            fatalError("\(key ?? typeKey(T.self))) could not be resolved. Did you forget to call the register-function?")
+            fatalError("'\(k)' could not be resolved. Did you forget to call the register-function?")
         }
         return c
     }
     
-    /// Resets all factories
+    /// Resets all factories and sets allowOverride to false.
     internal func reset() {
         factories.removeAll()
+        allowOverride = false
     }
     
-    private func typeKey<T>(_ type: T.Type) -> String {
-        String(describing: type)
+    private func typeKey<T>(_ type: T.Type, key: String? = nil) -> String {
+        let typeKey = String(describing: type)
+        if let key = key {
+            return "\(key)_\(typeKey)"
+        } else {
+            return typeKey
+        }
     }
 }
