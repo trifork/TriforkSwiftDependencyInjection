@@ -21,10 +21,9 @@ let package = Package(
         .target(
             name: "TriforkSwiftDependencyInjection",
             dependencies: [],
-            path: "TriforkSwiftDependencyInjection/Sources")
+            path: "TriforkSwiftDependencyInjection/Sources/TriforkSwiftDependencyInjection")
         .testTarget(
-            name: "TriforkSwiftDependencyInjectionTests",
             dependencies: ["TriforkSwiftDependencyInjection"],
-            path: "TriforkSwiftDependencyInjectionTests/Tests")
+            name: "TriforkSwiftDependencyInjection/Tests/TriforkSwiftDependencyInjectionTests")
     ]
 )
