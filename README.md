@@ -1,5 +1,7 @@
 # TriforkSwiftDependencyInjection 💉
 
+![banner](https://github.com/trifork/TriforkSwiftDependencyInjection/blob/master/banner.png)
+
 ## Installation
 
 Supports Swift Package Manager.
@@ -21,7 +23,6 @@ class MySingleton : Worker {
     private init() { }
 }
 ```
-
 
 ### Registering
 
