@@ -28,7 +28,17 @@ final class TriforkSwiftDependencyInjectionTests: XCTestCase {
         XCTAssertTrue(tester.breadKey is Croissant)
         XCTAssertTrue(tester.bread is PainAuChocolat)
         XCTAssertTrue(tester.chocolate is PainAuChocolat)
+    }
+
+    func testRegisterSingleton() {
+        Resolver.shared.registerAsSingleton(Earth.self, Earth())
+        Resolver.shared.register(Star.self, { Star() })
         
+        let tester = SingletonTester()
+        let tester2 = SingletonTester()
+
+        XCTAssertEqual(tester.earth.id, tester2.earth.id)
+        XCTAssertNotEqual(tester.star.id, tester2.star.id)
     }
     
     func testAllowOverride() {
@@ -49,6 +59,10 @@ final class TriforkSwiftDependencyInjectionTests: XCTestCase {
         Resolver.shared.register(Bread.self, { Croissant() })
         let tester4 = Tester()
         XCTAssertTrue(tester4.bread is Croissant)
+
+        Resolver.shared.registerAsSingleton(Bread.self, PainAuChocolat())
+        let tester5 = Tester()
+        XCTAssertTrue(tester5.bread is PainAuChocolat)
     }
 
     static var allTests = [

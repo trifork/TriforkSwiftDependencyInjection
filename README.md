@@ -20,6 +20,10 @@ class MySingleton : Worker {
     static let shared = MySingleton()
     private init() { }
 }
+
+protocol Planet { }
+class Earth : Planet {
+}
 ```
 
 ### Registering
@@ -30,7 +34,11 @@ Factory functions can be registered via the Resolver by using a protocol type or
 ```swift
 Resolver.shared.register(Bread.self, { PainAuChocolat() }) //Result: Will inject new `PainAuChocolat` instances for `Bread` properties.
 Resolver.shared.register(Bread.self, key: "🥐", { Croissant() }) //Result: Will inject new `Croissant` instances for `Bread` properties tagged with `"🥐"` key.
-Resolver.shared.register(Worker.self, { MySingleton.shared }) //Result: Will inject the singleton instance of `MySingleton` for `Worker` properties.
+
+// Singletons can be injected in different ways depending on your implementation:
+Resolver.shared.register(Worker.self, { MySingleton.shared }) //Result: Will inject the singleton instance of `MySingleton` for `Worker` properties, by invoking the function
+Resolver.shared.registerAsSingleton(Worker.self, MySingleton.shared) //Result: Will inject the singleton instance of `MySingleton` for `Worker` properties 
+Resolver.shared.registerAsSingleton(Planet.self, Earth()) //Result: Will inject the provided instance of `Earth` as singleton for `Planet` properties
 ```
 
 **NOTE:** Keys are only unique for the specific type they are registered for. This means that the `"🥐"` key is still available for the `Chocolate` protocol, eventhough it was used `Bread`.
