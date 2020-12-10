@@ -1,5 +1,9 @@
 # TriforkSwiftDependencyInjection 💉
 
+## Motivation
+
+TriforkSwiftDependencyInjection is a super lightweight property wrapper based depedency injection framework. It supports simple type specific resolving, but also key-based. 
+
 ## Installation
 
 Supports Swift Package Manager.
