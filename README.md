@@ -1,5 +1,9 @@
 # TriforkSwiftDependencyInjection 💉
 
+## Motivation
+
+TriforkSwiftDependencyInjection is a super lightweight property wrapper based depedency injection framework. It supports simple type specific resolving, but also key-based. 
+
 ## Installation
 
 Supports Swift Package Manager.
@@ -67,3 +71,9 @@ Resolver.shared.allowOverride = true
 #### What happens if I try to resolve a type or key that isn't registers
 
 It will fail with a `fatalError` telling you that the instance isn't registered.
+
+---
+
+<p style="text-align: center; background-color: rgba(0, 0, 0, 0.5);">
+  <img width="220" height="44" src="https://trifork.com/wp-content/themes/trifork-main/dw-img/logo-trifork-white.svg" alt="TRIFORK">
+</p>
